@@ -2,7 +2,7 @@ import React from "react";
 
 import './table.scss';
 
-const Table = ({ sortData, dataContent}) => {
+const Table = ({ sortData, dataContent, openModal}) => {
 	return (
 		<div>
 			<table className="text-center align-middle table table-dark table-bordered table-hover">
@@ -37,7 +37,7 @@ const Table = ({ sortData, dataContent}) => {
 								<td>{item.eye_color}</td>
 								<td>{item.birth_year}</td>
 								<td>{item.gender}</td>
-								<td className="open-modal">{item.homeworld}</td>
+								<td className="open-modal" onClick={() => openModal(item)}>{item.homeworld}</td>
 								<td>{item.films.map(
 									(item) => (
 										item + '\n'
