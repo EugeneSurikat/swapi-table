@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Table from './table/Table';
 import Loader from './loader/Loader';
-// import Modal from 'react-modal';
-import Modal from './modal/Modal';
+import Modal from './modal/modal';
 
 import './app.scss';
 
@@ -11,7 +10,7 @@ function App() {
   const [dataContent, setDataContent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [directionSort, setDirectionSort] = useState(true);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(true);
 
   useEffect(() => {
 
