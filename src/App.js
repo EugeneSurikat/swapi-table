@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Table from './table/Table';
 import Loader from './loader/Loader';
-import Modal from './modal/modal';
+import Modal from './modal/Modal';
 
 import './app.scss';
 
@@ -16,14 +16,16 @@ function App() {
 
     const fetchData = async () => {
       try {
-        const combinedData = [];
+        const requests = [];
         let pageIndex = 1;
 
         while (pageIndex <= 9) {
-          const response = await axios.get(`https://swapi.dev/api/people/?page=${pageIndex}`);
-          combinedData.push(...response.data.results);
+          requests.push(axios.get(`https://swapi.dev/api/people/?page=${pageIndex}`));
           pageIndex++;
         }
+        
+        const responses = await Promise.all(requests);
+        const combinedData = responses.flatMap(response => response.data.results);
 
         setDataContent(combinedData);
         setIsLoading(false);
