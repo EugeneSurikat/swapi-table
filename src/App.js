@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Table from './table/Table';
 import Loader from './loader/Loader';
-import Modal from './modal/Modal';
+import Modal from './modal/modal';
 
 import './app.scss';
 
@@ -60,19 +60,11 @@ function App() {
     setSelectedItem(null);
   };
 
-  // const planetInfo = (url) => {
-  //   axios(url).then(function (response) {
-  //     response.text().then(function (text) {
-  //       selectedItem.homeworld.textContent = text;
-  //     });
-  //   });
+  // const planetInfo = async (url) => {
+  //   const request = [];
+  //   request.push(axios.get(selectedItem.homeworld));
 
-  //   // console.log(planetInfo);
-
-
-
-  //   // axios.get(selectedItem.homeworld);
-  //   // const response = Promise.
+  //   const response = await Promise.all(request);
 
   //   // сделать запрос к url
   //   // дождаться ответа
@@ -89,7 +81,7 @@ function App() {
           <Modal
             isVisible={selectedItem !== null}
             title={selectedItem ? `Planet of ${selectedItem.name}` : ''}
-            content={selectedItem ? selectedItem.homeworld : 'ghbdtn'}
+            content={selectedItem ? selectedItem.homeworld : ''}
             onClose={closeModal}
           />
         </>
