@@ -10,7 +10,7 @@ function App() {
   const [dataContent, setDataContent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [directionSort, setDirectionSort] = useState(true);
-  const [selectedItem, setSelectedItem] = useState(true);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
 
@@ -23,7 +23,7 @@ function App() {
           requests.push(axios.get(`https://swapi.dev/api/people/?page=${pageIndex}`));
           pageIndex++;
         }
-        
+
         const responses = await Promise.all(requests);
         const combinedData = responses.flatMap(response => response.data.results);
 
@@ -60,6 +60,25 @@ function App() {
     setSelectedItem(null);
   };
 
+  // const planetInfo = (url) => {
+  //   axios(url).then(function (response) {
+  //     response.text().then(function (text) {
+  //       selectedItem.homeworld.textContent = text;
+  //     });
+  //   });
+
+  //   // console.log(planetInfo);
+
+
+
+  //   // axios.get(selectedItem.homeworld);
+  //   // const response = Promise.
+
+  //   // сделать запрос к url
+  //   // дождаться ответа
+  //   // из ответа вернуть json 
+  // }
+
   return (
     <div>
       {isLoading ? (
@@ -69,8 +88,8 @@ function App() {
           <Table dataContent={dataContent} sortData={sortData} openModal={openModal} />
           <Modal
             isVisible={selectedItem !== null}
-            title={selectedItem ? selectedItem.name : ''}
-            content={selectedItem ? selectedItem.homeworld : ''}
+            title={selectedItem ? `Planet of ${selectedItem.name}` : ''}
+            content={selectedItem ? selectedItem.homeworld : 'ghbdtn'}
             onClose={closeModal}
           />
         </>
