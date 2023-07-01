@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Table from './table/Table';
 import Loader from './loader/Loader';
-import Modal from './modal/modal';
+import OpenWindow from './openWindow/OpenWindow';
 
 import './app.scss';
 
@@ -60,16 +60,16 @@ function App() {
     setSelectedItem(null);
   };
 
-  // const planetInfo = async (url) => {
-  //   const request = [];
-  //   request.push(axios.get(selectedItem.homeworld));
+  const planetInfo = async (url) => {
+    const request = [];
+    request.push(axios.get(selectedItem.homeworld));
 
-  //   const response = await Promise.all(request);
+    const response = await Promise.all(request);
 
-  //   // сделать запрос к url
-  //   // дождаться ответа
-  //   // из ответа вернуть json 
-  // }
+    // сделать запрос к url
+    // дождаться ответа
+    // из ответа вернуть json 
+  }
 
   return (
     <div>
@@ -78,7 +78,7 @@ function App() {
       ) : (
         <>
           <Table dataContent={dataContent} sortData={sortData} openModal={openModal} />
-          <Modal
+          <OpenWindow
             isVisible={selectedItem !== null}
             title={selectedItem ? `Planet of ${selectedItem.name}` : ''}
             content={selectedItem ? selectedItem.homeworld : ''}

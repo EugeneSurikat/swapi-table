@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './modal.css';
+import './openWindow.css';
 
-const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
+const OpenWindow = ({ isVisible = false, title, content, footer, onClose }) => {
   const keydownHandler = ({ key }) => {
     switch (key) {
       case 'Escape':
@@ -39,4 +39,4 @@ const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
   );
 };
 
-export default Modal;
+export default OpenWindow;
