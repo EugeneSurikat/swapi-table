@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './openWindow.css';
+import './openWindow.scss';
 
 const OpenWindow = ({ isVisible = false, title, content, footer, onClose }) => {
   const keydownHandler = ({ key }) => {
@@ -12,10 +12,12 @@ const OpenWindow = ({ isVisible = false, title, content, footer, onClose }) => {
     }
   };
 
+  console.log(`is visible = ${isVisible}, title=${title}, content = ${content}, footer=${footer}, onClose = ${onClose}`); // добавленный console.log
+
   React.useEffect(() => {
     document.addEventListener('keydown', keydownHandler);
     return () => document.removeEventListener('keydown', keydownHandler);
-  });
+  }, []);
 
   return !isVisible ? null : (
     <div className="modal" onClick={onClose}>

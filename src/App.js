@@ -60,6 +60,13 @@ function App() {
     setSelectedItem(null);
   };
 
+  const buttonReset = () => {
+    
+    console.log(`selectrdItem defore reset ${selectedItem == null}`);
+    setSelectedItem(null);
+    console.log(`selectrdItem after reset ${selectedItem == null}`);
+  }
+
   const planetInfo = async (url) => {
     const request = [];
     request.push(axios.get(selectedItem.homeworld));
@@ -79,13 +86,14 @@ function App() {
         <>
           <Table dataContent={dataContent} sortData={sortData} openModal={openModal} />
           <OpenWindow
-            isVisible={selectedItem !== null}
+            isVisible={setSelectedItem != null}
             title={selectedItem ? `Planet of ${selectedItem.name}` : ''}
             content={selectedItem ? selectedItem.homeworld : ''}
             onClose={closeModal}
           />
         </>
       )}
+      <button onClick={buttonReset}>Reset</button>
     </div>
   );
 }
