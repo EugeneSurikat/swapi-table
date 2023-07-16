@@ -4,6 +4,9 @@ import Table from './table/Table';
 import Loader from './loader/Loader';
 import OpenWindow from './openWindow/OpenWindow';
 
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 import './app.scss';
 
 function App() {
@@ -11,6 +14,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [directionSort, setDirectionSort] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [show, setShow] = useState(false);
+
 
   useEffect(() => {
 
@@ -60,6 +65,14 @@ function App() {
     setSelectedItem(null);
   };
 
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleShow = (item) => {
+    setShow(item);
+  };
+
   const planetInfo = async (url) => {
     const request = [];
     request.push(axios.get(selectedItem.homeworld));
@@ -84,6 +97,23 @@ function App() {
             content={selectedItem ? selectedItem.homeworld : ''}
             onClose={closeModal}
           />
+
+          <Button variant="primary" onClick={() => handleShow(dataContent[0])}>
+            Open modal
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>{show ? `Planet of ${show.name}` : 'Name not found'}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{show ? show.homeworld : 'Homeworld not found'}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
         </>
       )}
     </div>
