@@ -37,7 +37,7 @@ const Table = ({ sortData, dataContent, openModal}) => {
 								<td>{item.eye_color}</td>
 								<td>{item.birth_year}</td>
 								<td>{item.gender}</td>
-								<td className="open-modal" onClick={() => openModal(item)}>{item.homeworld}</td>
+								<td className="pointer" onClick={() => openModal(item)}>{item.homeworld}</td>
 								<td>{item.films.map(
 									(item) => (
 										item + '\n'
