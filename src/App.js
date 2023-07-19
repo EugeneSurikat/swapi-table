@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Table from './table/Table';
 import Loader from './loader/Loader';
-import OpenWindow from './openWindow/OpenWindow';
-
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+// import OpenWindow from './openWindow/OpenWindow';
+import SwapiModal from './swapiModal/SwapiModal';
 
 import './app.scss';
 
@@ -14,7 +12,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [directionSort, setDirectionSort] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(null);
 
 
   useEffect(() => {
@@ -66,7 +64,7 @@ function App() {
   };
 
   const handleClose = () => {
-    setShow(false);
+    setShow(null);
   };
 
   const handleShow = (item) => {
@@ -90,30 +88,20 @@ function App() {
         <Loader />
       ) : (
         <>
-          <Table dataContent={dataContent} sortData={sortData} openModal={openModal} />
-          <OpenWindow
+          <Table dataContent={dataContent} sortData={sortData} handleShow={handleShow} />
+          {/* <OpenWindow
             isVisible={selectedItem !== null}
             title={selectedItem ? `Planet of ${selectedItem.name}` : ''}
             content={selectedItem ? selectedItem.homeworld : ''}
             onClose={closeModal}
+          /> */}
+          <SwapiModal
+            isVisible={show !== null}
+            show={show}
+            title={show ? `Planet of ${show.name}` : 'Name is not found'}
+            content={show ? show.homeworld : 'Homeworld is not found'}
+            onClick={handleClose}
           />
-
-          <Button variant="primary" onClick={() => handleShow(dataContent[0])}>
-            Open modal
-          </Button>
-
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>{show ? `Planet of ${show.name}` : 'Name not found'}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{show ? show.homeworld : 'Homeworld not found'}</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
         </>
       )}
     </div>

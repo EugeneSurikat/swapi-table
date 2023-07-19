@@ -2,7 +2,7 @@ import React from "react";
 
 import './table.scss';
 
-const Table = ({ sortData, dataContent, openModal}) => {
+const Table = ({ sortData, dataContent, openModal, handleShow}) => {
 	return (
 		<div>
 			<table className="text-center align-middle table table-dark table-bordered table-hover">
@@ -37,7 +37,7 @@ const Table = ({ sortData, dataContent, openModal}) => {
 								<td>{item.eye_color}</td>
 								<td>{item.birth_year}</td>
 								<td>{item.gender}</td>
-								<td className="pointer" onClick={() => openModal(item)}>{item.homeworld}</td>
+								<td className="pointer" onClick={() => handleShow(item)}>{item.homeworld}</td>
 								<td>{item.films.map(
 									(item) => (
 										item + '\n'
