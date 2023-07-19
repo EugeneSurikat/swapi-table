@@ -2,7 +2,7 @@ import React from "react";
 
 import './table.scss';
 
-const Table = ({ sortData, dataContent, openModal, handleShow}) => {
+const Table = ({ sortData, dataContent, handleShow}) => {
 	return (
 		<div>
 			<table className="text-center align-middle table table-dark table-bordered table-hover">

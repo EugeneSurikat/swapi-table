@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Table from './table/Table';
 import Loader from './loader/Loader';
-// import OpenWindow from './openWindow/OpenWindow';
 import SwapiModal from './swapiModal/SwapiModal';
 
 import './app.scss';
@@ -11,7 +10,6 @@ function App() {
   const [dataContent, setDataContent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [directionSort, setDirectionSort] = useState(true);
-  const [selectedItem, setSelectedItem] = useState(null);
   const [show, setShow] = useState(null);
 
 
@@ -55,14 +53,6 @@ function App() {
     setDirectionSort(!directionSort);
   };
 
-  const openModal = (item) => {
-    setSelectedItem(item);
-  };
-
-  const closeModal = () => {
-    setSelectedItem(null);
-  };
-
   const handleClose = () => {
     setShow(null);
   };
@@ -73,7 +63,7 @@ function App() {
 
   const planetInfo = async (url) => {
     const request = [];
-    request.push(axios.get(selectedItem.homeworld));
+    request.push(axios.get(show.homeworld));
 
     const response = await Promise.all(request);
 
@@ -89,18 +79,12 @@ function App() {
       ) : (
         <>
           <Table dataContent={dataContent} sortData={sortData} handleShow={handleShow} />
-          {/* <OpenWindow
-            isVisible={selectedItem !== null}
-            title={selectedItem ? `Planet of ${selectedItem.name}` : ''}
-            content={selectedItem ? selectedItem.homeworld : ''}
-            onClose={closeModal}
-          /> */}
           <SwapiModal
             isVisible={show !== null}
             show={show}
             title={show ? `Planet of ${show.name}` : 'Name is not found'}
             content={show ? show.homeworld : 'Homeworld is not found'}
-            onClick={handleClose}
+            handleClose={handleClose}
           />
         </>
       )}
